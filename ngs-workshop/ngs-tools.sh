@@ -83,6 +83,18 @@ apt-get install -y oracle-java8-installer
 ####################
 
 
+############
+## Puppet ##
+############
+cd /tmp/
+ubuntu_version=`lsb_release -s -c`
+wget --no-check-certificate https://apt.puppetlabs.com/puppetlabs-release-$ubuntu_version.deb
+dpkg -i puppetlabs-release-$ubuntu_version.deb
+apt-get install puppet
+rm puppetlabs-release-$ubuntu_version.deb
+####################
+
+
 ###############
 ## gnx-tools ##
 ###############
