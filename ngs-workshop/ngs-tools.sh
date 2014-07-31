@@ -41,6 +41,8 @@ apt-get install -y libgtextutils0
 apt-get install -y libgd-barcode-perl
 apt-get install -y libgd-graph-perl
 apt-get install -y libgd-graph3d-perl
+apt-get install -y libstatistics-descriptive-perl
+apt-get install -y libdbi-perl
 apt-get install -y xorg-dev
 apt-get install -y texinfo
 apt-get install -y build-essential
@@ -66,6 +68,7 @@ apt-get install -y libxft-dev
 apt-get install -y libxi-dev
 apt-get install -y libxrandr-dev
 apt-get install -y libxrender-dev
+apt-get install -y libqt4-dev
 ####################
 
 
@@ -480,33 +483,6 @@ rm R-3.1.0.tar.gz
 ####################
 
 
-########
-## Qt ##
-########
-tool_name='Qt'
-if [ ! -e "$install_dir/$tool_name" ]; then
-  echo "Creating installation directory for $tool_name"
-  mkdir -p "$install_dir/$tool_name"
-else
-  echo "Installation directory for $tool_name already exists"
-fi
-# Download the source code
-cd $install_dir/$tool_name
-wget --no-check-certificate http://download.qt-project.org/archive/qt/4.7/qt-everywhere-opensource-src-4.7.3.tar.gz
-tar -xzvf qt-everywhere-opensource-src-4.7.3.tar.gz
-# Compile
-cd qt-everywhere-opensource-src-4.7.3/
-./configure -opensource --prefix=$install_dir/$tool_name/4.7.3
-make 
-make install
-ln -s $install_dir/$tool_name/4.7.3 $install_dir/$tool_name/default
-# Cleanup
-cd ../
-rm -r qt-everywhere-opensource-src-4.7.3/
-rm qt-everywhere-opensource-src-4.7.3.tar.gz
-####################
-
-
 ##########
 ## AMOS ##
 ##########
@@ -522,7 +498,7 @@ cd $install_dir/$tool_name
 wget --no-check-certificate http://sourceforge.net/projects/amos/files/amos/3.1.0/amos-3.1.0.tar.gz
 tar -xzvf amos-3.1.0.tar.gz
 cd amos-3.1.0/
-./configure --prefix=$install_dir/$tool_name/3.1.0 --with-qmake-qt4=$install_dir/Qt/default/bin/qmake --enable-minimus=no
+./configure --prefix=$install_dir/$tool_name/3.1.0 --enable-minimus=no
 make
 make install
 ln -s $install_dir/$tool_name/3.1.0 $install_dir/$tool_name/default
