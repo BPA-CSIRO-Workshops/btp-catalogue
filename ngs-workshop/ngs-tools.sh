@@ -69,6 +69,7 @@ apt-get install -y libxi-dev
 apt-get install -y libxrandr-dev
 apt-get install -y libxrender-dev
 apt-get install -y libqt4-dev
+apt-get install -y python-software-properties
 ####################
 
 
