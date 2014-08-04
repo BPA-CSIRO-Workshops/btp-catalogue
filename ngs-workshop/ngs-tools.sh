@@ -142,7 +142,7 @@ fi
 # Download the source code
 cd $install_dir/$tool_name
 wget --no-check-certificate https://github.com/agordon/fastx_toolkit/releases/download/0.0.14/fastx_toolkit-0.0.14.tar.bz2
-tar -xjvf fastx_toolkit-0.0.14.tar.bz2
+tar -xjf fastx_toolkit-0.0.14.tar.bz2
 # Compile
 cd fastx_toolkit-0.0.14
 ./configure --prefix=$install_dir/$tool_name/0.0.14
@@ -239,7 +239,7 @@ fi
 # Download the source code
 cd $install_dir/$tool_name
 wget --no-check-certificate http://sourceforge.net/projects/samtools/files/samtools/0.1.18/samtools-0.1.18.tar.bz2
-tar -xjvf samtools-0.1.18.tar.bz2
+tar -xjf samtools-0.1.18.tar.bz2
 # Compile
 mv samtools-0.1.18 0.1.18
 cd 0.1.18/
@@ -264,7 +264,7 @@ fi
 # Download the source code
 cd $install_dir/$tool_name
 wget --no-check-certificate https://github.com/arq5x/bedtools2/releases/download/v2.20.1/bedtools-2.20.1.tar.gz
-tar -xzvf bedtools-2.20.1.tar.gz
+tar -xzf bedtools-2.20.1.tar.gz
 # Compile
 mv bedtools2-2.20.1 2.20.1
 cd 2.20.1
@@ -289,7 +289,7 @@ fi
 # Download the source code
 cd $install_dir/$tool_name
 wget --no-check-certificate http://hgdownload.cse.ucsc.edu/admin/exe/userApps.src.tgz
-tar -xzvf userApps.src.tgz
+tar -xzf userApps.src.tgz
 # Compile
 cd userApps/
 make
@@ -313,7 +313,7 @@ fi
 # Download the source code
 cd $install_dir/$tool_name
 wget --no-check-certificate https://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.10.tgz
-tar -xzvf velvet_1.2.10.tgz
+tar -xzf velvet_1.2.10.tgz
 # Compile
 mv velvet_1.2.10 1.2.10
 cd 1.2.10
@@ -340,7 +340,7 @@ fi
 # Download the source code
 cd $install_dir/$tool_name
 wget --no-check-certificate https://github.com/taoliu/MACS/archive/v1.4.2.tar.gz
-tar -xzvf v1.4.2.tar.gz
+tar -xzf v1.4.2.tar.gz
 # Compile
 cd MACS-1.4.2/
 python setup.py install --prefix $install_dir/$tool_name/1.4.2
@@ -365,7 +365,7 @@ fi
 # Download the jar files
 cd $install_dir/$tool_name
 wget --no-check-certificate http://www.ebi.ac.uk/sites/ebi.ac.uk/files/groups/bertone/software/PeakAnalyzer_1.4.tar.gz
-tar -xzvf PeakAnalyzer_1.4.tar.gz
+tar -xzf PeakAnalyzer_1.4.tar.gz
 mv PeakAnalyzer_1.4 1.4
 ln -s $install_dir/$tool_name/1.4 $install_dir/$tool_name/default
 # Cleanup
@@ -386,7 +386,7 @@ fi
 # Download the jar files
 cd $install_dir/$tool_name
 wget --no-check-certificate http://ccb.jhu.edu/software/tophat/downloads/tophat-1.4.1.tar.gz
-tar -xzvf tophat-1.4.1.tar.gz
+tar -xzf tophat-1.4.1.tar.gz
 # Compile
 cd tophat-1.4.1
 ./configure --with-bam=$install_dir/SAMtools/default --prefix=$install_dir/$tool_name/1.4.1
@@ -413,7 +413,7 @@ fi
 # Download the source code
 cd $install_dir/$tool_name
 wget --no-check-certificate http://cufflinks.cbcb.umd.edu/downloads/cufflinks-2.2.1.tar.gz
-tar -xzvf cufflinks-2.2.1.tar.gz
+tar -xzf cufflinks-2.2.1.tar.gz
 # Compile
 cd cufflinks-2.2.1/
 ./configure --prefix=/tools/Cufflinks/2.2.1 --with-bam=/tools/SAMtools/0.1.18/ --with-boost=/usr/
@@ -482,7 +482,7 @@ fi
 # Download the source code
 cd $install_dir/$tool_name
 wget --no-check-certificate http://cran.csiro.au/src/base/R-3/R-3.1.0.tar.gz
-tar -xzvf R-3.1.0.tar.gz
+tar -xzf R-3.1.0.tar.gz
 # Compile
 cd R-3.1.0/
 ./configure --prefix=/tools/R/3.1.0
@@ -509,7 +509,7 @@ fi
 # Download the source code
 cd $install_dir/$tool_name
 wget --no-check-certificate http://sourceforge.net/projects/amos/files/amos/3.1.0/amos-3.1.0.tar.gz
-tar -xzvf amos-3.1.0.tar.gz
+tar -xzf amos-3.1.0.tar.gz
 cd amos-3.1.0/
 ./configure --prefix=$install_dir/$tool_name/3.1.0 --enable-minimus=no
 make
