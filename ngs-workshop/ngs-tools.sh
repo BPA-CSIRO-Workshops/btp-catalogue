@@ -244,6 +244,10 @@ tar -xjf samtools-0.1.18.tar.bz2
 mv samtools-0.1.18 0.1.18
 cd 0.1.18/
 make
+mkdir -p $install_dir/$tool_name/0.1.18/lib
+cp $install_dir/$tool_name/0.1.18/libbam.a $install_dir/$tool_name/0.1.18/lib/
+mkdir -p $install_dir/$tool_name/0.1.18/include/bam
+cp $install_dir/$tool_name/0.1.18/*.h $install_dir/$tool_name/0.1.18/include/bam/
 ln -s $install_dir/$tool_name/0.1.18 $install_dir/$tool_name/default
 # Cleanup
 cd ../
