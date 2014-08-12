@@ -70,6 +70,7 @@ apt-get install -y libxrandr-dev
 apt-get install -y libxrender-dev
 apt-get install -y libqt4-dev
 apt-get install -y python-software-properties
+apt-get install -y libxml2-dev
 ####################
 
 
