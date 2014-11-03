@@ -38,6 +38,7 @@ apt-get install -y cmake-curses-gui
 ##########################
 apt-get install -y libgtextutils-dev
 apt-get install -y libgtextutils0
+apt-get install -y texlive-fonts-recommended
 apt-get install -y libgd-barcode-perl
 apt-get install -y libgd-graph-perl
 apt-get install -y libgd-graph3d-perl
