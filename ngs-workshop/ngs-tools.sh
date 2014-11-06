@@ -495,7 +495,7 @@ rm R-3.1.0.tar.gz
 ############
 ## MUMmer ##
 ############
-tool_name='AMOS'
+tool_name='MUMmer'
 if [ ! -e "$install_dir/$tool_name" ]; then
   echo "Creating installation directory for $tool_name"
   mkdir -p "$install_dir/$tool_name"
