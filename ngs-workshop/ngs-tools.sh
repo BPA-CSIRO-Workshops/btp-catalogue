@@ -28,7 +28,7 @@ packages=(${packages[*]} gcc g++ gfortran cmake cmake-curses-gui)
 ##########################
 ## Development Packages ##
 ##########################
-packages=(${packages[*]} libgtextutils-dev libgtextutils0 
+packages=(${packages[*]} libgtextutils-dev libgtextutils0 libblas-dev liblapack-dev
 texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
 libgd-barcode-perl libgd-graph-perl libgd-graph3d-perl libxml-perl
 libstatistics-descriptive-perl libdbi-perl python-setuptools libdbd-pg-perl
