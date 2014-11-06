@@ -29,12 +29,13 @@ packages=(${packages[*]} gcc g++ gfortran cmake cmake-curses-gui)
 ## Development Packages ##
 ##########################
 packages=(${packages[*]} libgtextutils-dev libgtextutils0 
-texlive-fonts-recommended libgd-barcode-perl libgd-graph-perl 
-libgd-graph3d-perl libstatistics-descriptive-perl libdbi-perl 
+texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+libgd-barcode-perl libgd-graph-perl libgd-graph3d-perl libxml-perl
+libstatistics-descriptive-perl libdbi-perl python-setuptools libdbd-pg-perl
 xorg-dev texinfo build-essential libpng12-0-dev libmysqlclient-dev
-libboost1.48-all-dev libssl-dev zlib1g-dev ncurses-dev xorg-dev
+libboost1.48-all-dev libssl-dev zlib1g-dev ncurses-dev xorg-dev csh
 libreadline6-dev texlive-latex-base texlive-fonts-extra libfontconfig1-dev 
-libfreetype6-dev libx11-dev libxcursor-dev libxext-dev libxft-dev
+libfreetype6-dev libx11-dev libxcursor-dev libxext-dev libxft-dev 
 libxi-dev libxrandr-dev libxrender-dev libqt4-dev python-software-properties
 libxml2-dev libeigen3-dev libeigen3-doc libcurl4-openssl-dev autoconf)
 ####################
@@ -73,7 +74,7 @@ ubuntu_version=`lsb_release -s -c`
 wget -4 --no-check-certificate https://apt.puppetlabs.com/puppetlabs-release-$ubuntu_version.deb
 dpkg -i puppetlabs-release-$ubuntu_version.deb
 apt-get update
-apt-get install puppet
+apt-get install -y puppet
 rm puppetlabs-release-$ubuntu_version.deb
 ####################
 
@@ -491,6 +492,57 @@ rm R-3.1.0.tar.gz
 ####################
 
 
+############
+## MUMmer ##
+############
+tool_name='AMOS'
+if [ ! -e "$install_dir/$tool_name" ]; then
+  echo "Creating installation directory for $tool_name"
+  mkdir -p "$install_dir/$tool_name"
+else
+  echo "Installation directory for $tool_name already exists"
+fi
+# Download the source code
+cd $install_dir/$tool_name
+wget -4 --no-check-certificate http://sourceforge.net/projects/mummer/files/mummer/3.23/MUMmer3.23.tar.gz
+tar -xzf MUMmer3.23.tar.gz
+mv MUMmer3.23 3.23
+cd 3.23
+make check
+make install
+ln -s $install_dir/$tool_name/3.23 $install_dir/$tool_name/mummer-default
+# Cleanup
+cd ../
+rm MUMmer3.23.tar.gz
+####################
+
+
+##########
+## BLAT ##
+##########
+tool_name='BLAT'
+if [ ! -e "$install_dir/$tool_name" ]; then
+  echo "Creating installation directory for $tool_name"
+  mkdir -p "$install_dir/$tool_name"
+else
+  echo "Installation directory for $tool_name already exists"
+fi
+# Download the source code
+cd $install_dir/$tool_name
+wget -4 --no-check-certificate http://users.soe.ucsc.edu/~kent/src/blatSrc35.zip
+unzip blatSrc35.zip
+mkdir -p $install_dir/$tool_name/35/bin
+cd blatSrc/
+sed -i 's/\s*BINDIR\s*=\s*${HOME}\/bin\/${MACHTYPE}/BINDIR=\/tools\/BLAT\/35\/bin/g' inc/common.mk
+export MACHTYPE=x86_64
+make
+ln -s $install_dir/$tool_name/35 $install_dir/$tool_name/blat-default
+# Cleanup
+cd ../
+rm blatSrc35.zip
+####################
+
+
 ##########
 ## AMOS ##
 ##########
@@ -506,6 +558,8 @@ cd $install_dir/$tool_name
 wget -4 --no-check-certificate http://sourceforge.net/projects/amos/files/amos/3.1.0/amos-3.1.0.tar.gz
 tar -xzf amos-3.1.0.tar.gz
 cd amos-3.1.0/
+export PATH=$install_dir/MUMmer/mummer-default:$PATH
+export PATH=$install_dir/BLAT/blat-default:$PATH
 ./configure --prefix=$install_dir/$tool_name/3.1.0 --enable-minimus=no
 make
 make install
@@ -514,6 +568,16 @@ ln -s $install_dir/$tool_name/3.1.0 $install_dir/$tool_name/amos-default
 cd ../
 rm -r amos-3.1.0/
 rm amos-3.1.0.tar.gz
+####################
+
+
+###########
+## QIIME ##
+###########
+easy_install -U pip
+easy_install -U distribute
+pip install numpy==1.7.1
+pip install qiime
 ####################
 
 
@@ -545,5 +609,7 @@ echo "export PATH=/tools/Cufflinks/cufflinks-default/bin:\$PATH" >> /etc/bash.ba
 echo "export PATH=/tools/Velvet/velvet-default:\$PATH" >> /etc/bash.bashrc
 echo "alias velveth_long=/tools/Velvet/velvet-default/velveth" >> /etc/bash.bashrc
 echo "alias velvetg_long=/tools/Velvet/velvet-default/velvetg" >> /etc/bash.bashrc
+echo "export PATH=/tools/MUMmer/mummer-default:\$PATH" >> /etc/bash.bashrc
+echo "export PATH=/tools/BLAT/blat-default/bin:\$PATH" >> /etc/bash.bashrc
 echo "export PATH=/tools/AMOS/amos-default/bin:\$PATH" >> /etc/bash.bashrc
 echo "export PATH=/tools/R/r-default/bin:\$PATH" >> /etc/bash.bashrc
