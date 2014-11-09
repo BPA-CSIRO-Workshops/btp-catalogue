@@ -271,7 +271,7 @@ fi
 #############################
 module_dir='de_novo'
 files=(
-  'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataDeNovo/velvet_1.2.07.tgz'
+  'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataDeNovo/velvet_1.2.10.tgz'
   'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataDeNovo/SRR022825.fastq.gz'
   'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataDeNovo/SRR022823.fastq.gz'
   'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataDeNovo/s_aureus_mrsa252.EB1_s_aureus_mrsa252.dna.chromosome.Chromosome.fa.gz'
