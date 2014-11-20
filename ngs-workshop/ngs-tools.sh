@@ -106,6 +106,7 @@ cd $install_dir/$tool_name
 wget -4 --no-check-certificate http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.1.zip
 unzip fastqc_v0.11.1.zip
 mv FastQC 0.11.1
+chmod a+x $install_dir/$tool_name/0.11.1/fastqc
 ln -s $install_dir/$tool_name/0.11.1 $install_dir/$tool_name/fastqc-default
 # Cleanup
 rm fastqc_v0.11.1.zip
