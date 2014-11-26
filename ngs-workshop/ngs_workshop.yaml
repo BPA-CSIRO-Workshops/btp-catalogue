@@ -7,6 +7,15 @@ ngs_workshop::trainee_uid: 1001
 ngs_workshop::trainee_gid: 1001
 
 ngs_workshop::modules:
+  CommandLine:
+    location: 'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataCommandLine'
+    data:
+      - 'cubane.pdb'
+      - 'ethane.pdb'
+      - 'methane.pdb'
+      - 'octane.pdb'
+      - 'pentane.pdb'
+      - 'propane.pdb'
   QC:
     location: 'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataQC'
     data:
