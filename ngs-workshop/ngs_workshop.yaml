@@ -60,6 +60,8 @@ ngs_workshop::modules:
       - 'junctions.bed'
       - 'deletions.bed'
       - 'insertions.bed'
+      - 'Targets.txt'
+      - 'pnas_expression.txt'
   de_novo:
     location: 'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataDeNovo'
     data:
