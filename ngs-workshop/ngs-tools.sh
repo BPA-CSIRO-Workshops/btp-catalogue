@@ -473,7 +473,7 @@ wget -4 --no-check-certificate http://cran.csiro.au/src/base/R-3/R-3.1.0.tar.gz
 tar -xzf R-3.1.0.tar.gz
 # Compile
 cd R-3.1.0/
-./configure --prefix=/tools/R/3.1.0
+./configure --prefix=/tools/R/3.1.0 --enable-R-shlib
 make all
 make install
 ln -s $install_dir/$tool_name/3.1.0 $install_dir/$tool_name/r-default
