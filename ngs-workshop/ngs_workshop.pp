@@ -66,12 +66,20 @@ define workshop_modules($location, $data) {
   $working_dir = hiera('ngs_workshop::working_dir')
   $trainee_user = hiera('ngs_workshop::trainee_user')
 
-  workshop_dir { "${parent_path}/${working_dir}/${name}": }
+  $data_path = "${parent_path}/${data_dir}"
+  $working_path = "${parent_path}/${working_dir}"
+
+  workshop_dir { "${parent_path}/${working_dir}/${name}": 
+    require => Workshop_dir[$parent_path],
+  }
 
   workshop_data { $data:
     location    => $location,
     destination => "${parent_path}/${data_dir}",
     module      => $name,
+    require     => [ Workshop_dir[$working_path],
+                   Workshop_dir[$data_path],
+                   Workshop_dir["${parent_path}/${working_dir}/${name}"] ],
   }
 }
 
