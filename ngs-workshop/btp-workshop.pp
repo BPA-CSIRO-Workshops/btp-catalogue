@@ -4,8 +4,8 @@ define workshop_dir {
     ensure  => directory,
     recurse => true,
     mode    => '0755',
-    owner   => $ngs_workshop::trainee_user,
-    group   => $ngs_workshop::trainee_user,
+    owner   => $btp_workshop::trainee_user,
+    group   => $btp_workshop::trainee_user,
   }
 }
 
@@ -29,15 +29,15 @@ define workshop_file($location, $link) {
   remote_file { $title:
     remote_location => "${location}/${title}",
     mode            => '0644',
-    owner           => $ngs_workshop::trainee_user,
-    group           => $ngs_workshop::trainee_user,
+    owner           => $btp_workshop::trainee_user,
+    group           => $btp_workshop::trainee_user,
   }
     
   file { "${link}/${title}":
     ensure  => link,
-    target  => "${ngs_workshop::data_path}/${title}",
-    owner   => $ngs_workshop::trainee_user,
-    group   => $ngs_workshop::trainee_user,
+    target  => "${btp_workshop::data_path}/${title}",
+    owner   => $btp_workshop::trainee_user,
+    group   => $btp_workshop::trainee_user,
     require => [Workshop_dir[$link], Remote_file[$title]],
   }
 }
@@ -52,8 +52,8 @@ define workshop_data($location, $destination, $module) {
 }
 
 define workshop_subdirs {
-  $parent_path = hiera('ngs_workshop::parent_path')
-  $working_dir = hiera('ngs_workshop::working_dir')
+  $parent_path = hiera('btp_workshop::parent_path')
+  $working_dir = hiera('btp_workshop::working_dir')
 
   workshop_dir { "${parent_path}/${working_dir}/${name}": 
     require => Workshop_dir[$parent_path],
@@ -61,9 +61,9 @@ define workshop_subdirs {
 }
 
 define workshop_modules($location, $data, $dirs) {
-  $parent_path = hiera('ngs_workshop::parent_path')
-  $data_dir = hiera('ngs_workshop::data_dir')
-  $working_dir = hiera('ngs_workshop::working_dir')
+  $parent_path = hiera('btp_workshop::parent_path')
+  $data_dir = hiera('btp_workshop::data_dir')
+  $working_dir = hiera('btp_workshop::working_dir')
 
   $data_path = "${parent_path}/${data_dir}"
   $working_path = "${parent_path}/${working_dir}"
@@ -77,25 +77,25 @@ define workshop_modules($location, $data, $dirs) {
   }
 
   workshop_subdirs { $dirs: 
-    before => File["/home/${ngs_workshop::trainee_user}/${name}"],
+    before => File["/home/${btp_workshop::trainee_user}/${name}"],
   }
 
-  file { [ "/home/${ngs_workshop::trainee_user}/${name}", 
-           "/home/${ngs_workshop::trainee_user}/Desktop/${name}" ]:
+  file { [ "/home/${btp_workshop::trainee_user}/${name}", 
+           "/home/${btp_workshop::trainee_user}/Desktop/${name}" ]:
     ensure => 'link',
     target => "${parent_path}/${working_dir}/${name}",
-    owner  => $ngs_workshop::trainee_user,
-    group  => $ngs_workshop::trainee_user,
+    owner  => $btp_workshop::trainee_user,
+    group  => $btp_workshop::trainee_user,
   }
 }
 
-class ngs_workshop {
-  $parent_path = hiera('ngs_workshop::parent_path')
-  $data_dir = hiera('ngs_workshop::data_dir')
-  $working_dir = hiera('ngs_workshop::working_dir')
-  $trainee_user = hiera('ngs_workshop::trainee_user')
-  $trainee_uid = hiera('ngs_workshop::trainee_uid')
-  $modules = hiera('ngs_workshop::modules', {})
+class btp_workshop {
+  $parent_path = hiera('btp_workshop::parent_path')
+  $data_dir = hiera('btp_workshop::data_dir')
+  $working_dir = hiera('btp_workshop::working_dir')
+  $trainee_user = hiera('btp_workshop::trainee_user')
+  $trainee_uid = hiera('btp_workshop::trainee_uid')
+  $modules = hiera('btp_workshop::modules', {})
 
   $data_path = "${parent_path}/${data_dir}"
   $working_path = "${parent_path}/${working_dir}"
@@ -148,5 +148,5 @@ class ngs_workshop {
 }
 
 node default {
-  include ngs_workshop
+  include btp_workshop
 }

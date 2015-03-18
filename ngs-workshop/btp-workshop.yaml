@@ -1,20 +1,20 @@
 ngs_wokshop::parent_path: '/mnt/workshop' 
-ngs_workshop::data_dir: 'data'
-ngs_workshop::working_dir: 'working'
-ngs_workshop::ubuntu_user: 'ubuntu'
-ngs_workshop::trainee_user: 'trainee'
-ngs_workshop::trainee_uid: 1001
-ngs_workshop::trainee_gid: 1001
+btp_workshop::data_dir: 'data'
+btp_workshop::working_dir: 'working'
+btp_workshop::ubuntu_user: 'ubuntu'
+btp_workshop::trainee_user: 'trainee'
+btp_workshop::trainee_uid: 1001
+btp_workshop::trainee_gid: 1001
 
-ngs_workshop::modules:
-  QC:
+btp_workshop::modules:
+  qc:
     location: 'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataQC'
     data:
       - 'bad_example.fastq'
       - 'good_example.fastq'
     dirs:
       - 'QC'
-  ChIP-seq:
+  chip-seq:
     location: 'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataChIPSeq'
     data:
       - 'Oct4.fastq'
@@ -24,9 +24,9 @@ ngs_workshop::modules:
       - 'mouse.mm10.genome'
       - 'mm10.fa'
     dirs:
-      - 'ChIP-seq/bowtie_index'
-      - 'ChIP-seq/data'
-  RNA-seq:
+      - 'chip-seq/bowtie_index'
+      - 'chip-seq/data'
+  rna-seq:
     location: 'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataRNASeq'
     data:
       - '2cells_1.fastq'
@@ -57,16 +57,16 @@ ngs_workshop::modules:
       - 'deletions.bed'
       - 'insertions.bed'
     dirs:
-      - 'RNA-seq/data'
-      - 'RNA-seq/annotation'
-      - 'RNA-seq/genome'
-      - 'RNA-seq/cuffdiff'
-      - 'RNA-seq/cufflinks'
-      - 'RNA-seq/cufflinks/ZV9_2cells_gtf_guided'
-      - 'RNA-seq/cufflinks/ZV9_6h_gtf_guided'
-      - 'RNA-seq/tophat'
-      - 'RNA-seq/tophat/ZV9_2cells'
-  NGS:
+      - 'rna-seq/data'
+      - 'rna-seq/annotation'
+      - 'rna-seq/genome'
+      - 'rna-seq/cuffdiff'
+      - 'rna-seq/cufflinks'
+      - 'rna-seq/cufflinks/ZV9_2cells_gtf_guided'
+      - 'rna-seq/cufflinks/ZV9_6h_gtf_guided'
+      - 'rna-seq/tophat'
+      - 'rna-seq/tophat/ZV9_2cells'
+  ngs:
     location: 'https://swift.rc.nectar.org.au:8888/v1/AUTH_809/NGSDataDeNovo'
     data:
       - 'SRR022825.fastq.gz'
@@ -83,4 +83,4 @@ ngs_workshop::modules:
       - 'SRR023408_trim1.fastq'
       - 'SRR023408_trim2.fastq'
     dirs:
-      - 'NGS'
+      - 'ngs'
