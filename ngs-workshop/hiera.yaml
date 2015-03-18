@@ -6,4 +6,6 @@
   :datadir: '/home/ubuntu/'
 
 :hierarchy:
-  - ngs_workshop
+  - btp_workshop
+  - btp_workshop_links
+  - btp_workshop_packages
