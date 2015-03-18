@@ -5,16 +5,7 @@ define workshop_dir {
     recurse => true,
     mode    => '0755',
     owner   => $ngs_workshop::trainee_user,
-     group   => $ngs_workshop::trainee_user,
-  }
-}
-
-# Helper resource for symbolic links
-define workshop_link($source) {
-  file { "${title}":
-    ensure  => link,
-    target  => $source,
-    require => Workshop_dir[$source],
+    group   => $ngs_workshop::trainee_user,
   }
 }
 
@@ -60,26 +51,41 @@ define workshop_data($location, $destination, $module) {
   }
 }
 
-define workshop_modules($location, $data) {
+define workshop_subdirs {
   $parent_path = hiera('ngs_workshop::parent_path')
-  $data_dir = hiera('ngs_workshop::data_dir')
   $working_dir = hiera('ngs_workshop::working_dir')
-  $trainee_user = hiera('ngs_workshop::trainee_user')
-
-  $data_path = "${parent_path}/${data_dir}"
-  $working_path = "${parent_path}/${working_dir}"
 
   workshop_dir { "${parent_path}/${working_dir}/${name}": 
     require => Workshop_dir[$parent_path],
   }
+}
+
+define workshop_modules($location, $data, $dirs) {
+  $parent_path = hiera('ngs_workshop::parent_path')
+  $data_dir = hiera('ngs_workshop::data_dir')
+  $working_dir = hiera('ngs_workshop::working_dir')
+
+  $data_path = "${parent_path}/${data_dir}"
+  $working_path = "${parent_path}/${working_dir}"
 
   workshop_data { $data:
     location    => $location,
     destination => "${parent_path}/${data_dir}",
     module      => $name,
     require     => [ Workshop_dir[$working_path],
-                   Workshop_dir[$data_path],
-                   Workshop_dir["${parent_path}/${working_dir}/${name}"] ],
+                   Workshop_dir[$data_path] ],
+  }
+
+  workshop_subdirs { $dirs: 
+    before => File["/home/${ngs_workshop::trainee_user}/${name}"],
+  }
+
+  file { [ "/home/${ngs_workshop::trainee_user}/${name}", 
+           "/home/${ngs_workshop::trainee_user}/Desktop/${name}" ]:
+    ensure => 'link',
+    target => "${parent_path}/${working_dir}/${name}",
+    owner  => $ngs_workshop::trainee_user,
+    group  => $ngs_workshop::trainee_user,
   }
 }
 
@@ -139,7 +145,6 @@ class ngs_workshop {
   }
 
   create_resources(workshop_modules, $modules)
-
 }
 
 node default {
