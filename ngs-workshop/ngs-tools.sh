@@ -2,11 +2,15 @@
 
 install_dir='/tools'
 owner='root'
+tools_location='https://swift.rc.nectar.org.au:8888/v1/AUTH_809/Tools'
+
 
 #############
 ## Prepare ##
 #############
 apt-get update
+# Prefer IPv4 over IPv6
+echo "precedence ::ffff:0:0/96 100" >> /etc/gai.conf
 packages=()
 ####################
 
@@ -84,7 +88,7 @@ rm puppetlabs-release-$ubuntu_version.deb
 ###############
 cd /tmp/
 # Download DEB package
-wget -4 --no-check-certificate https://launchpad.net/~tbooth/+archive/ppa1/+files/gnx-tools_0.1%2B20120305-1_all.deb
+wget -4 --no-check-certificate $tools_location/gnx-tools_0.1+20120305-1_all.deb
 dpkg -i gnx-tools_0.1+20120305-1_all.deb
 # Cleanup
 rm gnx-tools_0.1+20120305-1_all.deb
@@ -103,13 +107,13 @@ else
 fi
 # Download the jar files
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.1.zip
-unzip fastqc_v0.11.1.zip
-mv FastQC 0.11.1
-chmod a+x $install_dir/$tool_name/0.11.1/fastqc
-ln -s $install_dir/$tool_name/0.11.1 $install_dir/$tool_name/fastqc-default
+wget -4 --no-check-certificate $tools_location/fastqc/fastqc_v0.11.2.zip
+unzip fastqc_v0.11.2.zip
+mv FastQC 0.11.2
+chmod a+x $install_dir/$tool_name/0.11.2/fastqc
+ln -s $install_dir/$tool_name/0.11.2 $install_dir/$tool_name/fastqc-default
 # Cleanup
-rm fastqc_v0.11.1.zip
+rm fastqc_v0.11.2.zip
 ####################
 
 
@@ -125,7 +129,7 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate https://github.com/agordon/fastx_toolkit/releases/download/0.0.14/fastx_toolkit-0.0.14.tar.bz2
+wget -4 --no-check-certificate $tools_location/fastx_toolkit-0.0.14.tar.bz2
 tar -xjf fastx_toolkit-0.0.14.tar.bz2
 # Compile
 cd fastx_toolkit-0.0.14
@@ -151,12 +155,12 @@ else
 fi
 # Download the jar files
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://sourceforge.net/projects/picard/files/picard-tools/1.114/picard-tools-1.114.zip
-unzip picard-tools-1.114.zip
-mv picard-tools-1.114 1.114
-ln -s $install_dir/$tool_name/1.114 $install_dir/$tool_name/picard-default
+wget -4 --no-check-certificate $tools_location/picard-tools-1.119.zip
+unzip picard-tools-1.119.zip
+mv picard-tools-1.119 1.119
+ln -s $install_dir/$tool_name/1.119 $install_dir/$tool_name/picard-default
 # Cleanup
-rm picard-tools-1.114.zip
+rm picard-tools-1.119.zip
 ####################
 
 
@@ -172,16 +176,16 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://sourceforge.net/projects/bowtie-bio/files/bowtie/1.0.1/bowtie-1.0.1-src.zip
-unzip bowtie-1.0.1-src.zip
+wget -4 --no-check-certificate $tools_location/bowtie-1.1.1-src.zip
+unzip bowtie-1.1.1-src.zip
 # Compile
-mv bowtie-1.0.1 1.0.1
-cd 1.0.1/
+mv bowtie-1.1.1 1.1.1
+cd 1.1.1/
 make
-ln -s $install_dir/$tool_name/1.0.1 $install_dir/$tool_name/bowtie-default
+ln -s $install_dir/$tool_name/1.1.1 $install_dir/$tool_name/bowtie-default
 # Cleanup
 cd ../
-rm bowtie-1.0.1-src.zip
+rm bowtie-1.1.1-src.zip
 ####################
 
 
@@ -197,16 +201,16 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.2.3/bowtie2-2.2.3-source.zip
-unzip bowtie2-2.2.3-source.zip
+wget -4 --no-check-certificate $tools_location/bowtie2-2.2.4-source.zip
+unzip bowtie2-2.2.4-source.zip
 # Compile
-mv bowtie2-2.2.3 2.2.3
-cd 2.2.3/
+mv bowtie2-2.2.4 2.2.4
+cd 2.2.4/
 make
-ln -s $install_dir/$tool_name/2.2.3 $install_dir/$tool_name/bowtie2-default
+ln -s $install_dir/$tool_name/2.2.4 $install_dir/$tool_name/bowtie2-default
 # Cleanup
 cd ../
-rm bowtie2-2.2.3-source.zip
+rm bowtie2-2.2.4-source.zip
 ####################
 
 
@@ -222,20 +226,20 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://sourceforge.net/projects/samtools/files/samtools/0.1.18/samtools-0.1.18.tar.bz2
-tar -xjf samtools-0.1.18.tar.bz2
+wget -4 --no-check-certificate $tools_location/samtools-0.1.19.tar.bz2
+tar -xjf samtools-0.1.19.tar.bz2
 # Compile
-mv samtools-0.1.18 0.1.18
-cd 0.1.18/
+mv samtools-0.1.19 0.1.19
+cd 0.1.19/
 make
-mkdir -p $install_dir/$tool_name/0.1.18/lib
-cp $install_dir/$tool_name/0.1.18/libbam.a $install_dir/$tool_name/0.1.18/lib/
-mkdir -p $install_dir/$tool_name/0.1.18/include/bam
-cp $install_dir/$tool_name/0.1.18/*.h $install_dir/$tool_name/0.1.18/include/bam/
-ln -s $install_dir/$tool_name/0.1.18 $install_dir/$tool_name/samtools-default
+mkdir -p $install_dir/$tool_name/0.1.19/lib
+cp $install_dir/$tool_name/0.1.19/libbam.a $install_dir/$tool_name/0.1.19/lib/
+mkdir -p $install_dir/$tool_name/0.1.19/include/bam
+cp $install_dir/$tool_name/0.1.19/*.h $install_dir/$tool_name/0.1.19/include/bam/
+ln -s $install_dir/$tool_name/0.1.19 $install_dir/$tool_name/samtools-default
 # Cleanup
 cd ../
-rm samtools-0.1.18.tar.bz2
+rm samtools-0.1.19.tar.bz2
 ####################
 
 
@@ -251,16 +255,16 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate https://github.com/arq5x/bedtools2/releases/download/v2.20.1/bedtools-2.20.1.tar.gz
-tar -xzf bedtools-2.20.1.tar.gz
+wget -4 --no-check-certificate $tools_location/bedtools-2.22.1.tar.gz
+tar -xzf bedtools-2.22.1.tar.gz
 # Compile
-mv bedtools2-2.20.1 2.20.1
-cd 2.20.1
+mv bedtools2-2.22.1 2.22.1
+cd 2.22.1
 make
-ln -s $install_dir/$tool_name/2.20.1 $install_dir/$tool_name/bedtools-default
+ln -s $install_dir/$tool_name/2.22.1 $install_dir/$tool_name/bedtools-default
 # Cleanup
 cd ../
-rm bedtools-2.20.1.tar.gz
+rm bedtools-2.22.1.tar.gz
 ####################
 
 
@@ -276,15 +280,15 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://hgdownload.cse.ucsc.edu/admin/exe/userApps.src.tgz
-tar -xzf userApps.src.tgz
+wget -4 --no-check-certificate $tools_location/userApps.v310.src.tgz
+tar -xzf userApps.v310.src.tgz
 # Compile
 cd userApps/
 make
 ln -s $install_dir/$tool_name/userApps $install_dir/$tool_name/ucsctools-default
 # Cleanup
 cd ../
-rm userApps.src.tgz
+rm userApps.v310.src.tgz
 ####################
 
 
@@ -300,7 +304,7 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate https://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.10.tgz
+wget -4 --no-check-certificate $tools_location/velvet_1.2.10.tgz
 tar -xzf velvet_1.2.10.tgz
 # Compile
 mv velvet_1.2.10 1.2.10
@@ -327,7 +331,7 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate https://github.com/taoliu/MACS/archive/v1.4.2.tar.gz
+wget -4 --no-check-certificate $tools_location/v1.4.2.tar.gz
 tar -xzf v1.4.2.tar.gz
 # Compile
 cd MACS-1.4.2/
@@ -352,7 +356,7 @@ else
 fi
 # Download the jar files
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://www.ebi.ac.uk/sites/ebi.ac.uk/files/groups/bertone/software/PeakAnalyzer_1.4.tar.gz
+wget -4 --no-check-certificate $tools_location/PeakAnalyzer_1.4.tar.gz
 tar -xzf PeakAnalyzer_1.4.tar.gz
 mv PeakAnalyzer_1.4 1.4
 ln -s $install_dir/$tool_name/1.4 $install_dir/$tool_name/peakanalyzer-default
@@ -373,7 +377,7 @@ else
 fi
 # Download the jar files
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://ccb.jhu.edu/software/tophat/downloads/tophat-1.4.1.tar.gz
+wget -4 --no-check-certificate $tools_location/tophat-1.4.1.tar.gz
 tar -xzf tophat-1.4.1.tar.gz
 # Compile
 cd tophat-1.4.1
@@ -385,6 +389,33 @@ ln -s $install_dir/$tool_name/1.4.1 $install_dir/$tool_name/tophat-default
 cd ../
 rm -r tophat-1.4.1
 rm tophat-1.4.1.tar.gz
+####################
+
+
+##############
+## TopHat 2 ##
+##############
+tool_name='TopHat'
+if [ ! -e "$install_dir/$tool_name" ]; then
+  echo "Creating installation directory for $tool_name"
+  mkdir -p "$install_dir/$tool_name"
+else
+  echo "Installation directory for $tool_name already exists"
+fi
+# Download the jar files
+cd $install_dir/$tool_name
+wget -4 --no-check-certificate $tools_location/tophat-2.0.13.tar.gz
+tar -xzf tophat-2.0.13.tar.gz
+# Compile
+cd tophat-2.0.13
+./configure --prefix=$install_dir/$tool_name/2.0.13 --with-bam=$install_dir/SAMtools/samtools-default 
+make all
+make install
+ln -s $install_dir/$tool_name/2.0.13 $install_dir/$tool_name/tophat2-default
+# Cleanup
+cd ../
+rm -r tophat-2.0.13
+rm tophat-2.0.13.tar.gz
 ####################
 
 
@@ -400,7 +431,7 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://cufflinks.cbcb.umd.edu/downloads/cufflinks-2.2.1.tar.gz
+wget -4 --no-check-certificate $tools_location/cufflinks-2.2.1.tar.gz
 tar -xzf cufflinks-2.2.1.tar.gz
 # Compile
 cd cufflinks-2.2.1/
@@ -427,12 +458,12 @@ else
 fi
 # Download the jar files
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://www.broadinstitute.org/igv/projects/downloads/IGV_2.3.32.zip
-unzip IGV_2.3.32.zip
-mv IGV_2.3.32 2.3.32
-ln -s $install_dir/$tool_name/2.3.32 $install_dir/$tool_name/igv-default
+wget -4 --no-check-certificate $tools_location/IGV_2.3.40.zip
+unzip IGV_2.3.40.zip
+mv IGV_2.3.40 2.3.40
+ln -s $install_dir/$tool_name/2.3.40 $install_dir/$tool_name/igv-default
 # Cleanup
-rm IGV_2.3.32.zip
+rm IGV_2.3.40.zip
 ####################
 
 
@@ -448,35 +479,25 @@ else
 fi
 # Download the jar files
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://www.broadinstitute.org/igv/projects/downloads/igvtools_2.3.32.zip
-unzip igvtools_2.3.32.zip
-ln -s $install_dir/$tool_name/2.3.32 $install_dir/$tool_name/igvtools-default
-mv IGVTools 2.3.32
+wget -4 --no-check-certificate $tools_location/igvtools_2.3.40.zip
+unzip igvtools_2.3.40.zip
+ln -s $install_dir/$tool_name/2.3.40 $install_dir/$tool_name/igvtools-default
+mv IGVTools 2.3.40
 # Cleanup
-rm igvtools_2.3.32.zip
+rm igvtools_2.3.40.zip
 ####################
 
 
 #######
 ## R ##
 #######
-tool_name='R'
-if [ ! -e "$install_dir/$tool_name" ]; then
-  echo "Creating installation directory for $tool_name"
-  mkdir -p "$install_dir/$tool_name"
-else
-  echo "Installation directory for $tool_name already exists"
-fi
-# Download the source code
-cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://cran.csiro.au/src/base/R-3/R-3.1.0.tar.gz
-tar -xzf R-3.1.0.tar.gz
-# Compile
-cd R-3.1.0/
-./configure --prefix=/tools/R/3.1.0 --enable-R-shlib
-make all
-make install
-ln -s $install_dir/$tool_name/3.1.0 $install_dir/$tool_name/r-default
+ubuntu_version=`lsb_release -s -c`
+cat > /etc/apt/sources.list.d/r.list << EOF
+deb http://cran.csiro.au/bin/linux/ubuntu $ubuntu_version/
+EOF
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+apt-get update
+apt-get install -y r-base
 # Additional R Libraries
 cat > additional.R << EOF
 source("http://bioconductor.org/biocLite.R")
@@ -485,11 +506,7 @@ biocLite("edgeR")
 biocLite("cummeRbund")
 install.packages(pkgs="gplots",repos="http://cran.csiro.au/")
 EOF
-/tools/R/r-default/bin/R CMD BATCH additional.R
-# Cleanup
-cd ../
-rm -r R-3.1.0
-rm R-3.1.0.tar.gz
+/usr/bin/R CMD BATCH additional.R
 ####################
 
 
@@ -505,7 +522,7 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://sourceforge.net/projects/mummer/files/mummer/3.23/MUMmer3.23.tar.gz
+wget -4 --no-check-certificate $tools_location/MUMmer3.23.tar.gz
 tar -xzf MUMmer3.23.tar.gz
 mv MUMmer3.23 3.23
 cd 3.23
@@ -530,7 +547,7 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://users.soe.ucsc.edu/~kent/src/blatSrc35.zip
+wget -4 --no-check-certificate $tools_location/blatSrc35.zip
 unzip blatSrc35.zip
 mkdir -p $install_dir/$tool_name/35/bin
 cd blatSrc/
@@ -556,7 +573,7 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate http://sourceforge.net/projects/amos/files/amos/3.1.0/amos-3.1.0.tar.gz
+wget -4 --no-check-certificate $tools_location/amos-3.1.0.tar.gz
 tar -xzf amos-3.1.0.tar.gz
 cd amos-3.1.0/
 export PATH=$install_dir/MUMmer/mummer-default:$PATH
@@ -606,6 +623,7 @@ echo "export PATH=/tools/MACS/macs-default/bin:\$PATH" >> /etc/bash.bashrc
 echo "alias macs=/tools/MACS/macs-default/bin/macs14" >> /etc/bash.bashrc
 echo "export PYTHONPATH=/tools/MACS/macs-default/lib/python2.7/site-packages:\$PYTHONPATH" >> /etc/bash.bashrc
 echo "export PATH=/tools/TopHat/tophat-default/bin:\$PATH" >> /etc/bash.bashrc
+echo "export PATH=/tools/TopHat/tophat2-default/bin:\$PATH" >> /etc/bash.bashrc
 echo "export PATH=/tools/Cufflinks/cufflinks-default/bin:\$PATH" >> /etc/bash.bashrc
 echo "export PATH=/tools/Velvet/velvet-default:\$PATH" >> /etc/bash.bashrc
 echo "alias velveth_long=/tools/Velvet/velvet-default/velveth" >> /etc/bash.bashrc
@@ -613,4 +631,3 @@ echo "alias velvetg_long=/tools/Velvet/velvet-default/velvetg" >> /etc/bash.bash
 echo "export PATH=/tools/MUMmer/mummer-default:\$PATH" >> /etc/bash.bashrc
 echo "export PATH=/tools/BLAT/blat-default/bin:\$PATH" >> /etc/bash.bashrc
 echo "export PATH=/tools/AMOS/amos-default/bin:\$PATH" >> /etc/bash.bashrc
-echo "export PATH=/tools/R/r-default/bin:\$PATH" >> /etc/bash.bashrc
