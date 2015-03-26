@@ -107,10 +107,11 @@ else
 fi
 # Download the jar files
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate $tools_location/fastqc/fastqc_v0.11.2.zip
+wget -4 --no-check-certificate $tools_location/fastqc_v0.11.2.zip
 unzip fastqc_v0.11.2.zip
 mv FastQC 0.11.2
 chmod a+x $install_dir/$tool_name/0.11.2/fastqc
+chmod a+rx -R $install_dir/$tool_name/0.11.2
 ln -s $install_dir/$tool_name/0.11.2 $install_dir/$tool_name/fastqc-default
 # Cleanup
 rm fastqc_v0.11.2.zip
@@ -135,6 +136,7 @@ tar -xjf fastx_toolkit-0.0.14.tar.bz2
 cd fastx_toolkit-0.0.14
 ./configure --prefix=$install_dir/$tool_name/0.0.14
 make; make install
+chmod a+rx -R $install_dir/$tool_name/0.0.14
 ln -s $install_dir/$tool_name/0.0.14 $install_dir/$tool_name/fastx-toolkit-default
 # Cleanup
 cd ../
@@ -158,6 +160,7 @@ cd $install_dir/$tool_name
 wget -4 --no-check-certificate $tools_location/picard-tools-1.119.zip
 unzip picard-tools-1.119.zip
 mv picard-tools-1.119 1.119
+chmod a+rx -R $install_dir/$tool_name/1.119
 ln -s $install_dir/$tool_name/1.119 $install_dir/$tool_name/picard-default
 # Cleanup
 rm picard-tools-1.119.zip
@@ -182,6 +185,7 @@ unzip bowtie-1.1.1-src.zip
 mv bowtie-1.1.1 1.1.1
 cd 1.1.1/
 make
+chmod a+rx -R $install_dir/$tool_name/1.1.1
 ln -s $install_dir/$tool_name/1.1.1 $install_dir/$tool_name/bowtie-default
 # Cleanup
 cd ../
@@ -207,6 +211,7 @@ unzip bowtie2-2.2.4-source.zip
 mv bowtie2-2.2.4 2.2.4
 cd 2.2.4/
 make
+chmod a+rx -R $install_dir/$tool_name/2.2.4
 ln -s $install_dir/$tool_name/2.2.4 $install_dir/$tool_name/bowtie2-default
 # Cleanup
 cd ../
@@ -236,6 +241,7 @@ mkdir -p $install_dir/$tool_name/0.1.19/lib
 cp $install_dir/$tool_name/0.1.19/libbam.a $install_dir/$tool_name/0.1.19/lib/
 mkdir -p $install_dir/$tool_name/0.1.19/include/bam
 cp $install_dir/$tool_name/0.1.19/*.h $install_dir/$tool_name/0.1.19/include/bam/
+chmod a+rx -R $install_dir/$tool_name/0.1.19
 ln -s $install_dir/$tool_name/0.1.19 $install_dir/$tool_name/samtools-default
 # Cleanup
 cd ../
@@ -258,9 +264,10 @@ cd $install_dir/$tool_name
 wget -4 --no-check-certificate $tools_location/bedtools-2.22.1.tar.gz
 tar -xzf bedtools-2.22.1.tar.gz
 # Compile
-mv bedtools2-2.22.1 2.22.1
+mv bedtools2 2.22.1
 cd 2.22.1
 make
+chmod a+rx -R $install_dir/$tool_name/2.22.1
 ln -s $install_dir/$tool_name/2.22.1 $install_dir/$tool_name/bedtools-default
 # Cleanup
 cd ../
@@ -285,6 +292,7 @@ tar -xzf userApps.v310.src.tgz
 # Compile
 cd userApps/
 make
+chmod a+rx -R $install_dir/$tool_name/userApps
 ln -s $install_dir/$tool_name/userApps $install_dir/$tool_name/ucsctools-default
 # Cleanup
 cd ../
@@ -312,6 +320,7 @@ cd 1.2.10
 make 'MAXKMERLENGTH=59' 'LONGSEQUENCES=1' 'OPENMP=1'
 make 'MAXKMERLENGTH=59' 'LONGSEQUENCES=1' 'OPENMP=1' color
 make doc
+chmod a+rx -R $install_dir/$tool_name/1.2.10
 ln -s $install_dir/$tool_name/1.2.10 $install_dir/$tool_name/velvet-default
 # Cleanup
 cd ../
@@ -336,6 +345,7 @@ tar -xzf v1.4.2.tar.gz
 # Compile
 cd MACS-1.4.2/
 python setup.py install --prefix $install_dir/$tool_name/1.4.2
+chmod a+rx -R $install_dir/$tool_name/1.4.2
 ln -s $install_dir/$tool_name/1.4.2 $install_dir/$tool_name/macs-default
 # Cleanup
 cd ../
@@ -359,6 +369,7 @@ cd $install_dir/$tool_name
 wget -4 --no-check-certificate $tools_location/PeakAnalyzer_1.4.tar.gz
 tar -xzf PeakAnalyzer_1.4.tar.gz
 mv PeakAnalyzer_1.4 1.4
+chmod a+rx -R $install_dir/$tool_name/1.4
 ln -s $install_dir/$tool_name/1.4 $install_dir/$tool_name/peakanalyzer-default
 # Cleanup
 rm PeakAnalyzer_1.4.tar.gz
@@ -384,6 +395,7 @@ cd tophat-1.4.1
 ./configure --prefix=$install_dir/$tool_name/1.4.1 --with-bam=$install_dir/SAMtools/samtools-default 
 make all
 make install
+chmod a+rx -R $install_dir/$tool_name/1.4.1
 ln -s $install_dir/$tool_name/1.4.1 $install_dir/$tool_name/tophat-default
 # Cleanup
 cd ../
@@ -411,6 +423,7 @@ cd tophat-2.0.13
 ./configure --prefix=$install_dir/$tool_name/2.0.13 --with-bam=$install_dir/SAMtools/samtools-default 
 make all
 make install
+chmod a+rx -R $install_dir/$tool_name/2.0.13
 ln -s $install_dir/$tool_name/2.0.13 $install_dir/$tool_name/tophat2-default
 # Cleanup
 cd ../
@@ -438,6 +451,7 @@ cd cufflinks-2.2.1/
 ./configure --prefix=/tools/Cufflinks/2.2.1 --with-bam=/tools/SAMtools/samtools-default --with-boost=/usr/
 make all
 make install
+chmod a+rx -R $install_dir/$tool_name/2.2.1
 ln -s $install_dir/$tool_name/2.2.1 $install_dir/$tool_name/cufflinks-default
 # Cleanup
 cd ../
@@ -461,6 +475,7 @@ cd $install_dir/$tool_name
 wget -4 --no-check-certificate $tools_location/IGV_2.3.40.zip
 unzip IGV_2.3.40.zip
 mv IGV_2.3.40 2.3.40
+chmod a+rx -R $install_dir/$tool_name/2.3.40
 ln -s $install_dir/$tool_name/2.3.40 $install_dir/$tool_name/igv-default
 # Cleanup
 rm IGV_2.3.40.zip
@@ -481,6 +496,7 @@ fi
 cd $install_dir/$tool_name
 wget -4 --no-check-certificate $tools_location/igvtools_2.3.40.zip
 unzip igvtools_2.3.40.zip
+chmod a+rx -R $install_dir/$tool_name/2.3.40
 ln -s $install_dir/$tool_name/2.3.40 $install_dir/$tool_name/igvtools-default
 mv IGVTools 2.3.40
 # Cleanup
@@ -499,14 +515,15 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 apt-get update
 apt-get install -y r-base
 # Additional R Libraries
-cat > additional.R << EOF
+cd /tmp/
+cat > /tmp/additional.R << EOF
 source("http://bioconductor.org/biocLite.R")
 biocLite("DESeq2")
 biocLite("edgeR")
 biocLite("cummeRbund")
 install.packages(pkgs="gplots",repos="http://cran.csiro.au/")
 EOF
-/usr/bin/R CMD BATCH additional.R
+/usr/bin/R CMD BATCH /tmp/additional.R
 ####################
 
 
@@ -528,6 +545,7 @@ mv MUMmer3.23 3.23
 cd 3.23
 make check
 make install
+chmod a+rx -R $install_dir/$tool_name/3.23
 ln -s $install_dir/$tool_name/3.23 $install_dir/$tool_name/mummer-default
 # Cleanup
 cd ../
@@ -554,6 +572,7 @@ cd blatSrc/
 sed -i 's/\s*BINDIR\s*=\s*${HOME}\/bin\/${MACHTYPE}/BINDIR=\/tools\/BLAT\/35\/bin/g' inc/common.mk
 export MACHTYPE=x86_64
 make
+chmod a+rx -R $install_dir/$tool_name/35
 ln -s $install_dir/$tool_name/35 $install_dir/$tool_name/blat-default
 # Cleanup
 cd ../
@@ -581,6 +600,7 @@ export PATH=$install_dir/BLAT/blat-default:$PATH
 ./configure --prefix=$install_dir/$tool_name/3.1.0 --enable-minimus=no
 make
 make install
+chmod a+rx -R $install_dir/$tool_name/3.1.0
 ln -s $install_dir/$tool_name/3.1.0 $install_dir/$tool_name/amos-default
 # Cleanup
 cd ../
