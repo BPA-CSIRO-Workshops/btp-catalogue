@@ -33,9 +33,9 @@ rm v1.4.2.tar.gz
 #################
 chown -R $owner.$owner $install_dir/$tool_name
 echo "if ! echo \${PATH} | /bin/grep -q $install_dir/$tool_name/$tool_name-default/bin ; then" > /etc/profile.d/$tool_name.sh
-echo "PATH=$install_dir/$tool_name/$tool_name-default/bin:${PATH}" >> /etc/profile.d/$tool_name.sh
+echo "PATH=$install_dir/$tool_name/$tool_name-default/bin:\${PATH}" >> /etc/profile.d/$tool_name.sh
 echo "fi" >> /etc/profile.d/$tool_name.sh
 echo "if ! echo \${PYTHONPATH} | /bin/grep -q $install_dir/$tool_name/$tool_name-default/lib/python2.7/site-packages ; then" > /etc/profile.d/$tool_name.sh
-echo "PYTHONPATH=$install_dir/$tool_name/$tool_name-default/lib/python2.7/site-packages:${PYTHONPATH}" >> /etc/profile.d/$tool_name.sh
+echo "PYTHONPATH=$install_dir/$tool_name/$tool_name-default/lib/python2.7/site-packages:\${PYTHONPATH}" >> /etc/profile.d/$tool_name.sh
 echo "fi" >> /etc/profile.d/$tool_name.sh
 echo "alias macs=$install_dir/$tool_name/$tool_name-default/bin/macs15" >> /etc/profile.d/$tool_name.sh

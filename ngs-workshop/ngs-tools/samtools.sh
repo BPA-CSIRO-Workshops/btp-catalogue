@@ -37,14 +37,14 @@ rm samtools-0.1.19.tar.bz2
 #################
 chown -R $owner.$owner $install_dir/$tool_name
 echo "if ! echo \${PATH} | /bin/grep -q $install_dir/$tool_name/$tool_name-default ; then" > /etc/profile.d/$tool_name.sh
-echo "PATH=$install_dir/$tool_name/$tool_name-default:${PATH}" >> /etc/profile.d/$tool_name.sh
+echo "PATH=$install_dir/$tool_name/$tool_name-default:\${PATH}" >> /etc/profile.d/$tool_name.sh
 echo "fi" >> /etc/profile.d/$tool_name.sh
 echo "if ! echo \${PATH} | /bin/grep -q $install_dir/$tool_name/$tool_name-default/bcftools ; then" >> /etc/profile.d/$tool_name.sh
-echo "PATH=$install_dir/$tool_name/$tool_name-default/bcftools:${PATH}" >> /etc/profile.d/$tool_name.sh
+echo "PATH=$install_dir/$tool_name/$tool_name-default/bcftools:\${PATH}" >> /etc/profile.d/$tool_name.sh
 echo "fi" >> /etc/profile.d/$tool_name.sh
 echo "if ! echo \${PATH} | /bin/grep -q $install_dir/$tool_name/$tool_name-default/misc ; then" >> /etc/profile.d/$tool_name.sh
-echo "PATH=$install_dir/$tool_name/$tool_name-default/misc:${PATH}" >> /etc/profile.d/$tool_name.sh
+echo "PATH=$install_dir/$tool_name/$tool_name-default/misc:\${PATH}" >> /etc/profile.d/$tool_name.sh
 echo "fi" >> /etc/profile.d/$tool_name.sh
 echo "if ! echo \${PATH} | /bin/grep -q $install_dir/$tool_name/$tool_name-default/bin ; then" >> /etc/profile.d/$tool_name.sh
-echo "PATH=$install_dir/$tool_name/$tool_name-default/bin:${PATH}" >> /etc/profile.d/$tool_name.sh
+echo "PATH=$install_dir/$tool_name/$tool_name-default/bin:\${PATH}" >> /etc/profile.d/$tool_name.sh
 echo "fi" >> /etc/profile.d/$tool_name.sh

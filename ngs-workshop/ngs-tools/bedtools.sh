@@ -33,5 +33,5 @@ rm bedtools-2.22.1.tar.gz
 #################
 chown -R $owner.$owner $install_dir/$tool_name
 echo "if ! echo \${PATH} | /bin/grep -q $install_dir/$tool_name/$tool_name-default/bin ; then" > /etc/profile.d/$tool_name.sh
-echo "PATH=$install_dir/$tool_name/$tool_name-default/bin:${PATH}" >> /etc/profile.d/$tool_name.sh
+echo "PATH=$install_dir/$tool_name/$tool_name-default/bin:\${PATH}" >> /etc/profile.d/$tool_name.sh
 echo "fi" >> /etc/profile.d/$tool_name.sh

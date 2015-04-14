@@ -33,5 +33,5 @@ rm bowtie2-2.2.4-source.zip
 #################
 chown -R $owner.$owner $install_dir/$tool_name
 echo "if ! echo \${PATH} | /bin/grep -q $install_dir/$tool_name/$tool_name-default ; then" > /etc/profile.d/$tool_name.sh
-echo "PATH=$install_dir/$tool_name/$tool_name-default:${PATH}" >> /etc/profile.d/$tool_name.sh
+echo "PATH=$install_dir/$tool_name/$tool_name-default:\${PATH}" >> /etc/profile.d/$tool_name.sh
 echo "fi" >> /etc/profile.d/$tool_name.sh
