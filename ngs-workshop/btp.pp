@@ -14,6 +14,7 @@ define remote_file($remote_location, $destination, $mode='0644', $owner='root', 
   exec { "get_${title}":
     command => "/usr/bin/wget -q ${remote_location} -O ${destination}",
     creates => "${destination}",
+    timeout => 0,
   }
    
   file { "${destination}":
