@@ -16,7 +16,7 @@ else
 fi
 # Download the jar files
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate $tools_location/fastqc/fastqc_v0.11.2.zip
+wget -4 --no-check-certificate $tools_location/fastqc_v0.11.2.zip
 unzip fastqc_v0.11.2.zip
 mv FastQC 0.11.2
 chmod a+x $install_dir/$tool_name/0.11.2/fastqc
