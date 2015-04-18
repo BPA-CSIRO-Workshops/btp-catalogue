@@ -20,7 +20,7 @@ wget -4 --no-check-certificate $tools_location/tophat-1.4.1.tar.gz
 tar -xzf tophat-1.4.1.tar.gz
 # Compile
 cd tophat-1.4.1
-./configure --prefix=$install_dir/$tool_name/1.4.1 --with-bam=$install_dir/SAMtools/samtools-default
+./configure --prefix=$install_dir/$tool_name/1.4.1 --with-bam=$install_dir/samtools/samtools-default
 make all
 make install
 ln -s $install_dir/$tool_name/1.4.1 $install_dir/$tool_name/tophat-default

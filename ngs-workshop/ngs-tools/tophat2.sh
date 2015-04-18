@@ -20,7 +20,7 @@ wget -4 --no-check-certificate $tools_location/tophat-2.0.13.tar.gz
 tar -xzf tophat-2.0.13.tar.gz
 # Compile
 cd tophat-2.0.13
-./configure --prefix=$install_dir/$tool_name/2.0.13 --with-bam=$install_dir/SAMtools/samtools-default
+./configure --prefix=$install_dir/$tool_name/2.0.13 --with-bam=$install_dir/samtools/samtools-default
 make all
 make install
 ln -s $install_dir/$tool_name/2.0.13 $install_dir/$tool_name/$tool_name-default
