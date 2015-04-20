@@ -20,7 +20,7 @@ wget -4 --no-check-certificate $tools_location/cufflinks-2.2.1.tar.gz
 tar -xzf cufflinks-2.2.1.tar.gz
 # Compile
 cd cufflinks-2.2.1/
-./configure --prefix=/tools/Cufflinks/2.2.1 --with-bam=/tools/SAMtools/samtools-default --with-boost=/usr/
+./configure --prefix=$install_dir/$tool_name/2.2.1 --with-bam=$install_dir/samtools/samtools-default --with-boost=/usr/
 make all
 make install
 ln -s $install_dir/$tool_name/2.2.1 $install_dir/$tool_name/$tool_name-default

@@ -23,3 +23,8 @@ ln -s $install_dir/$tool_name/1.4 $install_dir/$tool_name/peakanalyzer-default
 # Cleanup
 rm PeakAnalyzer_1.4.tar.gz
 ####################
+
+#################
+## Setup Paths ##
+#################
+chown -R $owner.$owner $install_dir/$tool_name

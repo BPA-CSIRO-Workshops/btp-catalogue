@@ -19,7 +19,7 @@ cd $install_dir/$tool_name
 wget -4 --no-check-certificate $tools_location/bedtools-2.22.1.tar.gz
 tar -xzf bedtools-2.22.1.tar.gz
 # Compile
-mv bedtools2-2.22.1 2.22.1
+mv bedtools2 2.22.1
 cd 2.22.1
 make
 ln -s $install_dir/$tool_name/2.22.1 $install_dir/$tool_name/$tool_name-default

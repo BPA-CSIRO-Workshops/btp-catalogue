@@ -16,20 +16,20 @@ else
 fi
 # Download the source code
 cd $install_dir/$tool_name
-wget -4 --no-check-certificate $tools_location/samtools-0.1.19.tar.bz2
-tar -xjf samtools-0.1.19.tar.bz2
+wget -4 --no-check-certificate $tools_location/samtools-0.1.18.tar.bz2
+tar -xjf samtools-0.1.18.tar.bz2
 # Compile
-mv samtools-0.1.19 0.1.19
-cd 0.1.19/
+mv samtools-0.1.18 0.1.18
+cd 0.1.18/
 make
-mkdir -p $install_dir/$tool_name/0.1.19/lib
-cp $install_dir/$tool_name/0.1.19/libbam.a $install_dir/$tool_name/0.1.19/lib/
-mkdir -p $install_dir/$tool_name/0.1.19/include/bam
-cp $install_dir/$tool_name/0.1.19/*.h $install_dir/$tool_name/0.1.19/include/bam/
-ln -s $install_dir/$tool_name/0.1.19 $install_dir/$tool_name/$tool_name-default
+mkdir -p $install_dir/$tool_name/0.1.18/lib
+cp $install_dir/$tool_name/0.1.18/libbam.a $install_dir/$tool_name/0.1.18/lib/
+mkdir -p $install_dir/$tool_name/0.1.18/include/bam
+cp $install_dir/$tool_name/0.1.18/*.h $install_dir/$tool_name/0.1.18/include/bam/
+ln -s $install_dir/$tool_name/0.1.18 $install_dir/$tool_name/$tool_name-default
 # Cleanup
 cd ../
-rm samtools-0.1.19.tar.bz2
+rm samtools-0.1.18.tar.bz2
 ####################
 
 #################
